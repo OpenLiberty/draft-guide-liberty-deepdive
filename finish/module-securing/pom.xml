@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.7.2</version>
+            <version>42.7.3</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -47,7 +47,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>3.3.2</version>
+                    <version>3.4.0</version>
                 </plugin>
                 <plugin>
                     <groupId>io.openliberty.tools</groupId>
@@ -67,7 +67,7 @@
                             <dependency>
                                 <groupId>org.postgresql</groupId>
                                 <artifactId>postgresql</artifactId>
-                                <version>42.7.2</version>
+                                <version>42.7.3</version>
                             </dependency>
                         </dependencyGroup>
                     </copyDependencies>
