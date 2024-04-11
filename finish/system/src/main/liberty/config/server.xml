@@ -24,5 +24,7 @@
     <webApplication contextRoot="/system" location="system.war"/>
 
     <!-- Default SSL configuration enables trust for default certificates from the Java runtime -->
-    <ssl id="defaultSSLConfig" keyStoreRef="guideKeyStore" trustDefaultCerts="true" />
+    <ssl id="guideSSLConfig" keyStoreRef="guideKeyStore" trustDefaultCerts="true" />
+    <sslDefault sslRef="guideSSLConfig" />
+
 </server>
