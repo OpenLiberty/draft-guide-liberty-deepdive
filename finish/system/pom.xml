@@ -59,6 +59,9 @@
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
+                <configuration>
+                    <noPassword>true</noPassword>
+                </configuration>
             </plugin>
         </plugins>
     </build>
