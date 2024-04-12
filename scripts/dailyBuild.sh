@@ -17,8 +17,9 @@ if [ "$JDK_LEVEL" == "11" ]; then
     exit 0
 fi
 
-sed -i "\#<artifactId>liberty-maven-plugin</artifactId>#a<configuration><install><runtimeUrl>https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/nightly/$DATE/$DRIVER</runtimeUrl></install></configuration>" system/pom.xml module-getting-started/pom.xml module-openapi/pom.xml module-config/pom.xml
+sed -i "\#<noPassword>true</noPassword>#a<install><runtimeUrl>https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/nightly/$DATE/$DRIVER</runtimeUrl></install>" system/pom.xml module-getting-started/pom.xml module-openapi/pom.xml module-config/pom.xml
 cat system/pom.xml
+sed -i "\#<artifactId>liberty-maven-plugin</artifactId>#a<configuration><install><runtimeUrl>https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/nightly/$DATE/$DRIVER</runtimeUrl></install></configuration>" module-getting-started/pom.xml module-openapi/pom.xml module-config/pom.xml
 cat module-getting-started/pom.xml
 cat module-openapi/pom.xml
 cat module-config/pom.xml
