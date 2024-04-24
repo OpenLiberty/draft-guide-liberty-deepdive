@@ -26,7 +26,7 @@ sed -i "s;FROM icr.io/appcafe/open-liberty:full-java17-openj9-ubi;FROM cp.stg.ic
 cat module-kubernetes/Dockerfile
 
 echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin cp.stg.icr.io
-sudo docker pull -q "cp.stg.icr.io/cp/olc/open-liberty-daily:full-java11-openj9-ubi"
-sudo echo "build level:"; docker inspect --format "{{ index .Config.Labels \"org.opencontainers.image.revision\"}}" cp.stg.icr.io/cp/olc/open-liberty-daily:full-java11-openj9-ubi
+sudo docker pull -q "cp.stg.icr.io/cp/olc/open-liberty-daily:full-java17-openj9-ubi"
+sudo echo "build level:"; docker inspect --format "{{ index .Config.Labels \"org.opencontainers.image.revision\"}}" cp.stg.icr.io/cp/olc/open-liberty-daily:full-java17-openj9-ubi
 
 sudo -E ../scripts/testApp.sh
