@@ -30,7 +30,9 @@ cat module-securing/pom.xml
 cat module-jwt/pom.xml
 cat module-testcontainers/pom.xml
 
-sed -i "s;FROM icr.io/appcafe/open-liberty:full-java17-openj9-ubi;FROM $DOCKER_USERNAME/olguides:$BUILD-java17;g" module-kubernetes/Dockerfile
-cat module-kubernetes/Dockerfile
+if [[ "$DOCKER_USERNAME" != "" ]]; then
+    sed -i "s;FROM icr.io/appcafe/open-liberty:full-java17-openj9-ubi;FROM $DOCKER_USERNAME/olguides:$BUILD-java17;g" module-kubernetes/Dockerfile
+    cat module-kubernetes/Dockerfile
+fi
 
 sudo -E ../scripts/testApp.sh
