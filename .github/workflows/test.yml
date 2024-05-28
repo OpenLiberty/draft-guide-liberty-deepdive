@@ -66,6 +66,14 @@ jobs:
           sudo docker images
           logsPath=$(sudo find . -name "console.log" | grep system);
           sudo cat "$logsPath" | sudo grep Launching
+          logsPath=$(sudo find . -name "console.log" | grep module-getting-started);
+          sudo cat "$logsPath" | sudo grep Launching
+          logsPath=$(sudo find . -name "console.log" | grep module-openapi);
+          sudo cat "$logsPath" | sudo grep Launching
+          logsPath=$(sudo find . -name "console.log" | grep module-config);
+          sudo cat "$logsPath" | sudo grep Launching
+          logsPath=$(sudo find . -name "console.log" | grep module-jwt);
+          sudo cat "$logsPath" | sudo grep Launching
       - name: Archive server logs if failed
         if: failure()
         uses: actions/upload-artifact@v2
