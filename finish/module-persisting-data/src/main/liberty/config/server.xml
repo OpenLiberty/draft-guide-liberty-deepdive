@@ -12,6 +12,12 @@
     <variable name="postgres/hostname" defaultValue="localhost" />
     <variable name="postgres/portnum" defaultValue="5432" />
 
+    <basicRegistry id="basic" realm="BasicRealm">
+        <!--
+        <user name="yourUserName" password="" />
+        -->
+    </basicRegistry>
+
     <httpEndpoint id="defaultHttpEndpoint" host="*"
                   httpPort="${http.port}" 
                   httpsPort="${https.port}" />
