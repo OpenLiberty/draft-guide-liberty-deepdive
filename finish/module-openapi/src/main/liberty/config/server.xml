@@ -9,6 +9,12 @@
         <!-- end::mp5[] -->
     </featureManager>
 
+    <basicRegistry id="basic" realm="BasicRealm">
+        <!--
+        <user name="yourUserName" password="" />
+        -->
+    </basicRegistry>
+
     <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
     <httpEndpoint id="defaultHttpEndpoint"
                   httpPort="9080"
