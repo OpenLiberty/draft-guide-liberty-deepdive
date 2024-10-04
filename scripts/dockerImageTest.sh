@@ -1,8 +1,9 @@
 #!/bin/bash
-while getopts t:d: flag; do
+while getopts t:d:v: flag; do
     case "${flag}" in
     t) DATE="${OPTARG}" ;;
     d) DRIVER="${OPTARG}" ;;
+    v) OL_LEVEL="${OPTARG}";;
     *) echo "Invalid option" ;;
     esac
 done
@@ -22,11 +23,20 @@ cat module-securing/pom.xml
 cat module-jwt/pom.xml
 cat module-testcontainers/pom.xml
 
-sed -i "s;FROM icr.io/appcafe/open-liberty:full-java17-openj9-ubi;FROM cp.stg.icr.io/cp/olc/open-liberty-daily:full-java17-openj9-ubi;g" module-kubernetes/Dockerfile
+if [[ "$OL_LEVEL" != "" ]]; then
+  sed -i "s;FROM icr.io/appcafe/open-liberty:full-java17-openj9-ubi;FROM cp.stg.icr.io/cp/olc/open-liberty-vnext:$OL_LEVEL-full-java17-openj9-ubi;g" module-kubernetes/Dockerfile
+else
+  sed -i "s;FROM icr.io/appcafe/open-liberty:full-java17-openj9-ubi;FROM cp.stg.icr.io/cp/olc/open-liberty-daily:full-java17-openj9-ubi;g" module-kubernetes/Dockerfile
+fi
 cat module-kubernetes/Dockerfile
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin cp.stg.icr.io
-docker pull -q "cp.stg.icr.io/cp/olc/open-liberty-daily:full-java17-openj9-ubi"
-echo "build level:"; docker inspect --format "{{ index .Config.Labels \"org.opencontainers.image.revision\"}}" cp.stg.icr.io/cp/olc/open-liberty-daily:full-java17-openj9-ubi
+if [[ "$OL_LEVEL" != "" ]]; then
+  docker pull -q "cp.stg.icr.io/cp/olc/open-liberty-vnext:$OL_LEVEL-full-java17-openj9-ubi"
+  echo "build level:"; docker inspect --format "{{ index .Config.Labels \"org.opencontainers.image.revision\"}}" "cp.stg.icr.io/cp/olc/open-liberty-vnext:$OL_LEVEL-full-java17-openj9-ubi"
+else
+  docker pull -q "cp.stg.icr.io/cp/olc/open-liberty-daily:full-java17-openj9-ubi"
+  echo "build level:"; docker inspect --format "{{ index .Config.Labels \"org.opencontainers.image.revision\"}}" "cp.stg.icr.io/cp/olc/open-liberty-daily:full-java17-openj9-ubi"
+fi
 
 ../scripts/testApp.sh
